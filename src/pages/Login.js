@@ -2,9 +2,8 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="w-full h-screen">
-      <div className="backdrop-blur-sm fixed top-0 left-0 w-full h-screen flex justify-center items-center">
-        <div className="w-[450px] h-[500px] bg-gray-300 flex justify-center items-center">
+    <div className="w-full h-screen  flex justify-center items-center">
+        <div className="w-full h-screen bg-gray-300 flex justify-center items-center sm:h-[500px] sm:w-[450px]">
           <div className="w-[320px] h-[400px]">
             <h1 className="text-3xl font-bold">Login</h1>
             <form className="w-full flex flex-col text-xs gap-4 mt-4">
@@ -49,7 +48,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

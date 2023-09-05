@@ -1,49 +1,46 @@
 import { useParams } from 'react-router-dom';
-import { ImageItem ,ImagesItem } from '../components';
-import DescriptionItem from '../components/DescriptionItem';
-import { setItems } from '../redux-toolkit/Player';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect} from 'react';
+import { ImageItem,ImagesItem,DescriptionItem,AddtoCard } from '../pages';
+import { useEffect ,useMemo} from 'react';
 import {  useFetchProductsByProductCodesQuery } from '../redux-toolkit/Api';
-import AddtoCard from '../components/AddtoCard';
 
-
-function Item() {
+const Item=()=>{
     const { productcode } = useParams();
-    const dispatch = useDispatch();
-    const items = useSelector((state) => state.player.items);
+    // const dispatch = useDispatch();
     const { data: itemsData, isLoading: isItemsLoading, isError: isItemsError } = useFetchProductsByProductCodesQuery(productcode);
   
-    useEffect(() => {
-      if (itemsData) {
-        dispatch(setItems(itemsData));
-      }
-    }, [itemsData, dispatch]);
-  
+    // useEffect(() => {
+    //   if (itemsData) {
+    //     dispatch(setItems(itemsData));
+    //   }
+    // }, [itemsData, dispatch]);
+
+    const filteredItems = useMemo(() => itemsData?.filter((article) => article.code === productcode), [itemsData, productcode]);
+
   
       if (isItemsLoading) {
-          return <div>Loading...</div>;
+          return <div className='w-full h-full flex justify-center items-center'>Loading...</div>;
       }
   
       if (isItemsError) {
           return <div>Error occurred while fetching data.</div>;
       }
-  const filteredItems = items.filter((article) => article.code === productcode);
 
-  return (
-    <div className='flex justify-center items-center w-full '>
-    <div className=' h-full px-40 flex flex-col w-[400px] justify-center items-center md:w-full md:flex-row'>
-       <div className=''> 
-        <ImageItem filteredItems={filteredItems}/>
-       </div>
-       <div className='flex flex-col justify-between bg-gray-100 w-[400px] md:w-full overflow-scroll h-[550px] scrollbar-hide'>
-          <DescriptionItem filteredItems={filteredItems} />
-          <AddtoCard filteredItems={filteredItems}/>
-          <ImagesItem items={items}  />
-       </div>
-    </div>
-    </div>
-  );
-}
+
+      return (
+        <div className='w-full flex justify-center items-center md:p-10 lg:py-10 lg:px-32'>
+        <div className='w-full flex flex-col items-center justify-center sm:w-[450px] md:flex-row md:w-auto md:h-[520px]  '>
+           <div className='md:w-[350px]'> 
+            <ImageItem filteredItems={filteredItems}/>
+           </div>
+           <div className='w-full flex flex-col justify-between bg-gray-100 md:overflow-scroll scrollbar-hide  md:h-[520px] lg:px-10'>
+              <DescriptionItem filteredItems={filteredItems} />
+              <AddtoCard filteredItems={filteredItems}/>
+              <ImagesItem items={itemsData}  />
+           </div>
+        </div>
+        </div>
+    
+      );
+    }
 
 export default Item;

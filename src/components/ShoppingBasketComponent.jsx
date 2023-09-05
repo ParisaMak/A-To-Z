@@ -1,23 +1,31 @@
-import { removeFromShoppingList } from '../redux-toolkit/Player';
+import { removeFromShoppingList ,setTotalPrice } from '../redux-toolkit/Player';
 import { useDispatch } from 'react-redux';
-import { AiOutlineDelete, AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 function ShoppingBasketComponent({ listItem }) {
+  const price = listItem?.product?.whitePrice.price ;
+  const quantity= listItem.quantity;
+  const totalPrice = price * quantity
   const dispatch = useDispatch();
 
   const handleRemoveFromShoppingList = (product) => {
     dispatch(removeFromShoppingList({ product }));
   };
 
-  const numberArray = Array.from({ length: 20 }, (_, index) => index + 1);
+  dispatch(setTotalPrice(totalPrice));
 
+  const numberArray = Array.from({ length: 20 }, (_, index) => index + 1);
+   console.log(listItem )
   return (
-    <div >
-      <div className="bg-white border-[1px] border-gray-500 w-full flex flex-row gap-4 p-4 rounded-lg">
-        <div className="w-[150px] h-[150px]">
-          <img src={listItem?.product?.galleryDetails[0]?.baseUrl} className="bw-full h-full object-cover rounded-sm" />
+    <div className='w-full flex justify-center items-center bg-white' >
+      <div className="w-[300px] flex flex-col justify-center items-center  gap-4 p-8 sm:flex-row sm:p-4  sm:w-full">
+        <div className="w-full h-full sm:w-[150px] sm:h-[150px]">
+         <Link to={`/items/${listItem?.product.code}`}>
+            <img src={listItem?.product?.galleryDetails[0]?.baseUrl} className="w-full h-full object-cover rounded-sm" />
+         </Link> 
         </div>
-        <div className="w-full flex flex-col rounded-sm justify-between">
+        <div className="w-full flex flex-col rounded-sm justify-between ">
           <div className="text-[13px] font-bold">
             <p>{listItem?.product?.name}</p>
             <p>{listItem?.product?.whitePrice.price} {listItem?.product?.whitePrice.currency}</p>
@@ -29,22 +37,19 @@ function ShoppingBasketComponent({ listItem }) {
             </div>
             <div className="flex flex-row gap-4">
               <p>Size: {listItem?.size}</p>
-              <p>Price: {listItem?.product?.whitePrice.price}:{listItem?.product?.whitePrice.currency}</p>
+              <p>Price: {totalPrice}:{listItem?.product?.whitePrice.currency}</p>
             </div>
           </div>
-          <div className="flex gap-4">
-            <button onClick={() => handleRemoveFromShoppingList(listItem)}><AiOutlineHeart className="hover:text-red-700" /></button>
+          <div className="flex gap-4 justify-between">
             <select className="border-2 border-black">
               {numberArray.map((number) => (
                 <option key={number} value={number}>
-                  {number}
+                  {listItem.quantity}
                 </option>
               ))}
             </select>
+            <button onClick={() => handleRemoveFromShoppingList(listItem)}><AiOutlineDelete className="hover:text-gray-500"/></button>
           </div>
-        </div>
-        <div>
-          <button onClick={() => handleRemoveFromShoppingList(listItem)}><AiOutlineDelete className="hover:text-gray-500" /></button>
         </div>
       </div>
     </div>

@@ -3,21 +3,18 @@ import { Link } from 'react-router-dom';
 
 function MiddleNavbar() {
   const { data ,isLoading } = useFetchCategoriesQuery();
-  
-  let categories = [];
-  if (Array.isArray(data)) {
-    categories = data;
-  }
-  if (isLoading ) {
-    return <div></div>;
+  const categories = Array.isArray(data) ? data : [];
+
+  if (isLoading) {
+    return null;
   }
 
   return (
-    <div className='w-full flex flex-row justify-between items-center gap-2 '>
+    <div className='w-full flex flex-row flex-wrap justify-center items-center gap-2 sm:flex-nowrap sm:justify-between '>
       {categories.map((item) => (
-        <div className='w-full text-center' key={item.CatName}>
+        <div  key={item.CatName} className="w-[100px] sm:w-full">
           <Link to={`/${item.CatName}`}>
-            <p className='border-[2px] text-[10px] struncate border-black rounded-3xl py-2 hover:bg-red-700 hover:text-white hover:border-white sm:text-sm'>
+            <p className='w-full text-center border-[1px] text-[11px] border-black py-2 px-2 hover:bg-red-700 hover:text-white hover:border-white md:text-sm '>
               {item.CatName}
             </p>
           </Link>

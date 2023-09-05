@@ -1,16 +1,25 @@
-import { BasicConcept ,ModernClassicConcept, PartyContext,SchoolContext, MiddleNavbar, } from '../components';
-import { Suspense } from 'react';
+import React from 'react';
+import { MamaConcept, ModernClassicConcept, PartyContext, SchoolContext, MiddleNavbar ,EverydayFashionConcept } from '.';
+
+const MemoizedMamaConcept = React.memo(MamaConcept);
+const MemoizedModernClassicConcept = React.memo(ModernClassicConcept);
+const MemoizedPartyContext = React.memo(PartyContext);
+const MemoizedSchoolContext = React.memo(SchoolContext);
+const MemoizedMiddleNavbar = React.memo(MiddleNavbar);
+const MemoizedEverydayFashionConcept = React.memo(EverydayFashionConcept);
 
 function Home() {
+
   return (
-    <div className='p-4 sm:px-32 flex flex-col gap-10 lg:px-40'>
-      <Suspense fallback={<div>Loading...</div>}>
-        <BasicConcept />
-        <PartyContext />
-        <MiddleNavbar />
-        <SchoolContext />
-        <ModernClassicConcept />
-      </Suspense>
+    <div className='w-full p-10 flex flex-col gap-10 lg:px-40'>
+        <>
+          <MemoizedEverydayFashionConcept/>
+          <MemoizedModernClassicConcept/>
+          <MemoizedPartyContext  />
+          <MemoizedMiddleNavbar  />
+          <MemoizedSchoolContext />
+          <MemoizedMamaConcept  />
+        </>
     </div>
   );
 }

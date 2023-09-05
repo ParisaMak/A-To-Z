@@ -58,7 +58,7 @@ function MultiLevelMenu() {
 
   return (
 
-      <div className=' w-full flex flex-col px-10'>
+      <div className=' hidden w-full lg:flex flex-col px-10'>
          <div className='w-full grid grid-cols-6 gap-4 text-sm pb-2 border-b-[1px] border-gray-300 text-start pl-4'>
             {categories.map((category, index) => (
               <button className="hover:underline text-start " onClick={handleClick} >{category.CatName}</button>

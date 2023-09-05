@@ -4,6 +4,7 @@ const initialState = {
   items: [],
   cartItems: [],
   favorites: [],
+  totalPrice:[]
 };
 
 const playerSlice = createSlice({
@@ -11,11 +12,17 @@ const playerSlice = createSlice({
   initialState,
   reducers: {
     addToShoppingList: (state, action) => {
-      const { product, quantity, size } = action.payload;
-      const newItem = { product, quantity, size };
-      state.cartItems = [...state.cartItems, newItem];
-      
-    },removeFromShoppingList: (state, action) => {
+      const { product, quantity, size } = action.payload; 
+      const existingItem = state.cartItems.find(item => item.product.code === product.code && item.size === size);
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        const newItem = { product, quantity, size };
+        state.cartItems = [...state.cartItems, newItem];
+      }
+
+   },
+    removeFromShoppingList: (state, action) => {
       const {product}  = action.payload;
       state.cartItems = state.cartItems.filter(item => {
         return item?.product?.code!== product?.product.code || item?.size!== product.size
@@ -31,19 +38,20 @@ const playerSlice = createSlice({
     removeFromFavoriteList: (state, action) => {
       const product  = action.payload;
       state.favorites = state.favorites.filter(item => {
-      console.log('item',item?.articles[0]?.code)
-      console.log('product',product?.product?.articles[0]?.code)
         return item?.articles[0]?.code!== product?.product?.articles[0]?.code
         });
     },
     setItems: (state, action) => {
       state.items = action.payload;
     },
+    setTotalPrice: (state, action) => {
+      state.totalPrice += action.payload;
+    },
   },
 });
 
 export default playerSlice.reducer;
-export const { addToShoppingList, setItems, setFavorites,removeFromShoppingList ,removeFromFavoriteList } = playerSlice.actions;
+export const { addToShoppingList, setItems, setFavorites,removeFromShoppingList ,removeFromFavoriteList,setTotalPrice } = playerSlice.actions;
 
 
 
