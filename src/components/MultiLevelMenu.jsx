@@ -15,7 +15,7 @@ const Article = ({ article, category, item, handleClick  }) => {
 };
 
 const Item = ({ item, category, handleClick }) => {
-  console.log("item" ,item)
+
   return (
     <div key={item?.CatName} >
       <p >{item?.CatName}</p>

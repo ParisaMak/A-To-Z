@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
 function CheckOut() {
-    const totalPriceValue = useSelector((state) => state.player.totalPrice);
+    const totalPriceValue = useSelector((state) => state.cart.totalPrice);
     const deliveryPrice=3.99
     console.log(totalPriceValue)
   return (

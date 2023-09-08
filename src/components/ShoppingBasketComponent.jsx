@@ -1,4 +1,4 @@
-import { removeFromShoppingList ,setTotalPrice } from '../redux-toolkit/Player';
+import { removeFromShoppingList ,setTotalPrice } from '../redux-toolkit/Slice/CartSlice';
 import { useDispatch } from 'react-redux';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';

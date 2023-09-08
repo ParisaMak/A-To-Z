@@ -1,21 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { ImageItem,ImagesItem,DescriptionItem,AddtoCard } from '../pages';
-import { useEffect ,useMemo} from 'react';
+import { useMemo} from 'react';
 import {  useFetchProductsByProductCodesQuery } from '../redux-toolkit/Api';
 
 const Item=()=>{
     const { productcode } = useParams();
-    // const dispatch = useDispatch();
+
     const { data: itemsData, isLoading: isItemsLoading, isError: isItemsError } = useFetchProductsByProductCodesQuery(productcode);
   
-    // useEffect(() => {
-    //   if (itemsData) {
-    //     dispatch(setItems(itemsData));
-    //   }
-    // }, [itemsData, dispatch]);
-
     const filteredItems = useMemo(() => itemsData?.filter((article) => article.code === productcode), [itemsData, productcode]);
-
   
       if (isItemsLoading) {
           return <div className='w-full h-full flex justify-center items-center'>Loading...</div>;
@@ -24,7 +17,6 @@ const Item=()=>{
       if (isItemsError) {
           return <div>Error occurred while fetching data.</div>;
       }
-
 
       return (
         <div className='w-full flex justify-center items-center md:p-10 lg:py-10 lg:px-32'>

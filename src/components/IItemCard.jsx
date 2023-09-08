@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineHeart } from 'react-icons/ai';
-import { setFavorites } from '../redux-toolkit/Player';
+import { setFavorites } from '../redux-toolkit/Slice/FavoriteSlice';
 import { useDispatch } from 'react-redux';
 
 function ItemCard({ item }) {

@@ -39,7 +39,10 @@ const ImageSlider = ({ data }) => {
             {data.results.map((item) => (
               <div className=" flex flex-row w-full" key={item?.id}>
                 <Link className="w-full p-0 m-0 sm:w-1/2 " to={`/items/${item.articleCodes[0]}`}>
-                  <LazyLoadImage src={item.galleryImages[0]?.baseUrl} alt="img" className="w-full  object-cover " />
+                  <LazyLoadImage src={item.galleryImages[0]?.baseUrl} 
+                  alt="img"  
+                  className="w-full object-cover"
+                   />
                 </Link>
                 <Link className="w-0 sm:w-1/2 p-0 m-0" to={`/items/${item.articleCodes[0]}`}>
                   <LazyLoadImage src={item.galleryImages[1]?.baseUrl} alt="img" className="w-full object-cover" />

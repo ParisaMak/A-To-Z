@@ -5,7 +5,7 @@ import CheckOut from '../components/CheckOut';
 
 function ShoppingCard() {
 
-    const shoppingList = useSelector((state) => state.player.cartItems);
+    const shoppingList = useSelector((state) => state.cart.cartItems);
 
     return (
         <div className=' w-full h-full p-4 bg-gray-300 md:p-10'>

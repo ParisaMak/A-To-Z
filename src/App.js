@@ -1,6 +1,7 @@
 import { Home, Product, Products, Item, Items, ShoppingCard , Login, SignUp, Favorites  }from './pages';
 import MainLayout  from './Layouts/MainLayout';
-import { Routes ,Route  }  from 'react-router-dom'
+import { Routes ,Route  }  from 'react-router-dom';
+import Profile from  "./components/Profile"
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
                   <Route path='items/:productcode' element={<Item />} />
                   <Route path='shoppingcart' element={<ShoppingCard />} />
                   <Route path='favorites' element={<Favorites />} />
+                  <Route path='/profile' element={<Profile/>} />
               </Routes>
             </MainLayout >
           }

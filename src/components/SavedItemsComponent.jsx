@@ -1,4 +1,4 @@
-import { removeFromFavoriteList } from '../redux-toolkit/Player';
+import { removeFromFavoriteList } from '../redux-toolkit/Slice/FavoriteSlice';
 import { useDispatch } from 'react-redux';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';

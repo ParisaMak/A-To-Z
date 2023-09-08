@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addToShoppingList } from '../redux-toolkit/Player';
+import { addToShoppingList } from '../redux-toolkit/Slice/CartSlice';
 
 function AddToCard({ filteredItems }) {
   const product = filteredItems[0];
