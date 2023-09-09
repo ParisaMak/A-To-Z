@@ -12,6 +12,9 @@ const favoriteSlice = createSlice({
     setId:(state, action)=>{
       state.userId = action.payload
      },
+     resetFavoriteItems: (state,action) => {
+      state.favorites = action.payload
+    },
     setFavorites: (state, action) => {
       if(state.userId===null) return
       const newItem = action.payload;
@@ -24,14 +27,14 @@ const favoriteSlice = createSlice({
       if(!state.userId) return
       const product  = action.payload;
       state.favorites = state.favorites.filter(item => {
-        return item?.articles[0]?.code!== product?.product?.articles[0]?.code
+        return item?.code !== product?.product?.code
         });
     },
   },
 });
 
 export default favoriteSlice.reducer;
-export const { setFavorites, removeFromFavoriteList ,setId  } = favoriteSlice.actions;
+export const { setFavorites, removeFromFavoriteList ,setId ,resetFavoriteItems } = favoriteSlice.actions;
 
 
 

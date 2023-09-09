@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/H&M-Logo.svg.png';
 import { useSelector ,useDispatch } from 'react-redux';
 import {logout } from '../redux-toolkit/Slice/userSlice';
-import { setUserId } from '../redux-toolkit/Slice/CartSlice';
-import { setId } from '../redux-toolkit/Slice/FavoriteSlice';
-import {resetCartItems} from '../redux-toolkit/Slice/CartSlice';
+import { setUserId ,resetCartItems } from '../redux-toolkit/Slice/CartSlice';
+import { setId,resetFavoriteItems } from '../redux-toolkit/Slice/FavoriteSlice';
 import {signOutUser} from '../firebase/firebase.utils'
 const linksNames = [
   { to: "/customerservice", label: "Customer Service" },
@@ -25,6 +24,7 @@ const Navbar = () => {
    dispatch(setUserId(null));
    dispatch(setId(null));
    dispatch(resetCartItems([]));
+   dispatch(resetFavoriteItems([]));
   }
   return (
     <div className="h-[50px] px-4 w-full font-light z-20 text-[15px] sm:px-10 sm:text-sm xl:text-lg">

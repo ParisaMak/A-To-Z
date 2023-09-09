@@ -1,22 +1,19 @@
-import { removeFromShoppingList ,setTotalPrice } from '../redux-toolkit/Slice/CartSlice';
+import { removeFromShoppingList  } from '../redux-toolkit/Slice/CartSlice';
 import { useDispatch } from 'react-redux';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
-function ShoppingBasketComponent({ listItem }) {
-  const price = listItem?.product?.whitePrice.price ;
-  const quantity= listItem.quantity;
-  const totalPrice = price * quantity
+function ShoppingBasketComponent({ listItem  }) {
   const dispatch = useDispatch();
 
   const handleRemoveFromShoppingList = (product) => {
     dispatch(removeFromShoppingList({ product }));
   };
 
-  dispatch(setTotalPrice(totalPrice));
+ 
 
   const numberArray = Array.from({ length: 20 }, (_, index) => index + 1);
-   console.log(listItem )
+
   return (
     <div className='w-full flex justify-center items-center bg-white' >
       <div className="w-[300px] flex flex-col justify-center items-center  gap-4 p-8 sm:flex-row sm:p-4  sm:w-full">
@@ -37,7 +34,7 @@ function ShoppingBasketComponent({ listItem }) {
             </div>
             <div className="flex flex-row gap-4">
               <p>Size: {listItem?.size}</p>
-              <p>Price: {totalPrice}:{listItem?.product?.whitePrice.currency}</p>
+              <p>Price: {(listItem?.product?.whitePrice.price)*listItem.quantity}:{listItem?.product?.whitePrice.currency}</p>
             </div>
           </div>
           <div className="flex gap-4 justify-between">

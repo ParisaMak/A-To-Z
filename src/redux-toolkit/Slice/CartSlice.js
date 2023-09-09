@@ -19,6 +19,7 @@ const cartSlice = createSlice({
         alert('Please login to add items to your shopping list.');
       } else {
         const { product, quantity, size } = action.payload;
+
         const existingItem = state.cartItems.find(
           item => item.product.code === product.code && item.size === size
         );
@@ -37,7 +38,7 @@ const cartSlice = createSlice({
       });
     },
     setTotalPrice: (state, action) => {
-      state.totalPrice += action.payload;
+      state.totalPrice = action.payload;
     },
     resetCartItems: (state,action) => {
       state.cartItems = action.payload

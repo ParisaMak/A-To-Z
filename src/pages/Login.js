@@ -53,7 +53,6 @@ const handleSubmit = async (e) =>{
    dispatch(login(user));
    dispatch(setUserId(user.uid));
    dispatch(setId(user.uid));
-
    navigate("/profile" , { replace: true });
    resetFormFiels()
 

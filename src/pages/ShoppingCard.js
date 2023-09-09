@@ -1,12 +1,21 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setTotalPrice } from '../redux-toolkit/Slice/CartSlice';
 import ShoppingBasketComponent from '../components/ShoppingBasketComponent';
 import CheckOut from '../components/CheckOut';
 
 
 function ShoppingCard() {
-
+    const dispatch = useDispatch();
     const shoppingList = useSelector((state) => state.cart.cartItems);
 
+    const itemPrice = shoppingList.map((product)=>{
+      const price = product.product.whitePrice.price;
+      const quantity = product.quantity;
+      return price*quantity
+    })
+    const totalPrice = itemPrice.reduce((total, currentValue) => total + currentValue, 0);
+ 
+    dispatch(setTotalPrice(totalPrice));
     return (
         <div className=' w-full h-full p-4 bg-gray-300 md:p-10'>
           <h2 className='pb-4 font-bold text-lg'>Shopping Basket</h2>
@@ -16,13 +25,13 @@ function ShoppingCard() {
              <div className='w-full h-full flex flex-col gap-2 justify-center items-center '>
               {shoppingList.map((listItem)=>{
                 return(
-               <ShoppingBasketComponent listItem={listItem} />
+               <ShoppingBasketComponent listItem={listItem} totalPrice={totalPrice} />
                 )
               })}
              
               </div >
              <div className=' h-full w-[300px]  sm:w-full lg:w-[500px]'>
-               <CheckOut />
+               <CheckOut totalPrice={totalPrice} />
              </div>
           </div>
           )}

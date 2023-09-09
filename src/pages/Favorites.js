@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import SavedItemsComponent from '../components/SavedItemsComponent';
 
 function Favorites() {
-  const favorites = useSelector((state) => state.player.favorites);
+  const favorites = useSelector((state) => state.favorite.favorites);
 
   return (
     <div className="bg-white w-full h-full p-10">
