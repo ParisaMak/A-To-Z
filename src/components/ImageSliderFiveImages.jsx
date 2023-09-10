@@ -7,8 +7,8 @@ const ImageSliderFiveImages = ({ itemsToShow}) => {
     <div className="relative w-full ">
        {Array.isArray(itemsToShow) && (
           <div className="flex flex-row w-full whitespace-nowrap">
-            {itemsToShow.map((item) => (
-              <div className="flex flex-row w-full" key={item?.id}>
+            {itemsToShow.map((item ,index) => (
+              <div className="flex flex-row w-full" key={index}>
                 <Link className="w-full p-0 m-0 sm:w-full " to={`/items/${item.articleCodes[0]}`}>
                   <LazyLoadImage src={item.galleryImages[0]?.baseUrl} alt="img" className="w-full h-auto object-top" />
                 </Link>

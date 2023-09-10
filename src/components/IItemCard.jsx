@@ -2,13 +2,29 @@
 import { Link } from "react-router-dom";
 import { AiOutlineHeart } from 'react-icons/ai';
 import { setFavorites } from '../redux-toolkit/Slice/FavoriteSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {addItemInFavoriteCart } from "../firebase/firestore.js"
 
 function ItemCard({ item }) {
   const product =item?.articles[0]
   const dispatch = useDispatch();
-  const handleAddToFavorite = (item) => {
-    dispatch(setFavorites(item))}
+
+  const userId = useSelector((state)=>state.user.userId)
+
+  const handleAddToFavorite = (product) => {
+    
+    const {code,name} = product
+    const price = product?.whitePrice.price|| product?.whitePrice.value;
+    const image=product?.images[0]?.baseUrl;
+    const saveItem = {
+      code,
+      price,
+      name,
+      image
+    };
+    dispatch(setFavorites(saveItem))
+    addItemInFavoriteCart(userId ,saveItem)
+  }
 
   return (
     <div className="relative w-[200px] h-[270px] px-6 rounded-lg shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex flex-col pt-4 ">

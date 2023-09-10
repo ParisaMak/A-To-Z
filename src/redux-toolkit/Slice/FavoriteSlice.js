@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const favoriteSlice = createSlice({
-  name: 'Favorite',
+  name: 'favorite',
   initialState,
   reducers: {
     setId:(state, action)=>{
@@ -16,13 +16,16 @@ const favoriteSlice = createSlice({
       state.favorites = action.payload
     },
     setFavorites: (state, action) => {
-      if(state.userId===null) return
-      const newItem = action.payload;
-      const isAlreadyFavorite = state.favorites.some(item => item.code === newItem.code);
-      if (!isAlreadyFavorite) {
-        state.favorites.push(newItem);
-      }
-    },
+      if (state.userId === null) return
+        const {code,image,price ,name } = action.payload;
+        const existingItem = state.cartItems.find(
+          item => item?.product?.code === code 
+        );
+        if (!existingItem) {
+          const newItem = { code,image,price, name };
+          state.cartItems = [...state.cartItems, newItem];
+        }
+      },
     removeFromFavoriteList: (state, action) => {
       if(!state.userId) return
       const product  = action.payload;
@@ -30,6 +33,7 @@ const favoriteSlice = createSlice({
         return item?.code !== product?.product?.code
         });
     },
+ 
   },
 });
 

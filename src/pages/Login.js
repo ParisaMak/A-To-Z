@@ -1,9 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState  } from 'react';
-import { useDispatch } from "react-redux";
-import { setUserId } from '../redux-toolkit/Slice/CartSlice';
-import { setId } from '../redux-toolkit/Slice/FavoriteSlice';
-import { login } from '../redux-toolkit/Slice/userSlice';
+
 import { 
   signInWithGooglePopup ,
   // createUserDocumentFromAuth ,
@@ -19,8 +16,6 @@ const Login = () => {
   const [formFields ,setFormFields] = useState(defaultFormFields);
   const { email ,password } = formFields;
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  
   const resetFormFiels = () =>{
     setFormFields(defaultFormFields)
   }
@@ -34,10 +29,7 @@ const Login = () => {
     try {
         const {user} = await signInWithGooglePopup();
         navigate("/profile");
-        dispatch(login(user));
-        dispatch(setUserId(user.uid));
-        dispatch(setId(user.uid));
-
+    
     } catch (error) {
         if (error.code === 'auth/popup-closed-by-user') {
             console.log('Google sign-in popup was closed before sign-in was complete.');
@@ -50,9 +42,6 @@ const handleSubmit = async (e) =>{
   e.preventDefault();
   try{
    const {user} = await signInAuthUserWithEmailAndPassword (email,password);
-   dispatch(login(user));
-   dispatch(setUserId(user.uid));
-   dispatch(setId(user.uid));
    navigate("/profile" , { replace: true });
    resetFormFiels()
 

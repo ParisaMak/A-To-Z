@@ -19,8 +19,8 @@ const Item = ({ item, category, handleClick }) => {
   return (
     <div key={item?.CatName} >
       <p >{item?.CatName}</p>
-      {item?.CategoriesArray?.map((article) => (
-        <Article article={article} category={category} item={item} handleClick ={handleClick } />
+      {item?.CategoriesArray?.map((article,index) => (
+        <Article key={index} article={article} category={category} item={item} handleClick ={handleClick } />
       ))}
     </div>
   );
@@ -33,7 +33,7 @@ const Category = ({categories,handleClick }) => {
   return (
     <div className="grid grid-cols-6 w-full items-start gap-4  pt-4 bg-gray-100 text-xs pl-4 ">
        {categories.map((category, index ,handleClick ) => (
-          <div className="font-bold">
+          <div key={index} className="font-bold">
             {category.CategoriesArray
               .filter((item) => allowedCategories.includes(item.CatName))
               .map((item) => (
@@ -61,7 +61,7 @@ function MultiLevelMenu() {
       <div className=' hidden w-full lg:flex flex-col px-10'>
          <div className='w-full grid grid-cols-6 gap-4 text-sm pb-2 border-b-[1px] border-gray-300 text-start pl-4'>
             {categories.map((category, index) => (
-              <button className="hover:underline text-start " onClick={handleClick} >{category.CatName}</button>
+              <button key={index} className="hover:underline text-start " onClick={handleClick} >{category.CatName}</button>
              ))}
           </div>
           {menuOpen? 

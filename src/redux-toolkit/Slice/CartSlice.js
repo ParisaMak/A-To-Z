@@ -15,26 +15,22 @@ const cartSlice = createSlice({
   
     },
     addToShoppingList: (state, action) => {
-      if (state.userId === null) {
-        alert('Please login to add items to your shopping list.');
-      } else {
-        const { product, quantity, size } = action.payload;
-
+      if (state.userId === null) return
+        const {code, quantity, size,color,image,price ,name } = action.payload;
         const existingItem = state.cartItems.find(
-          item => item.product.code === product.code && item.size === size
+          item => item?.product?.code === code && item?.size === size
         );
         if (existingItem) {
           existingItem.quantity += quantity;
         } else {
-          const newItem = { product, quantity, size };
+          const newItem = { code,color,image,price, quantity, size ,name };
           state.cartItems = [...state.cartItems, newItem];
         }
-      }
-    },
+      },
     removeFromShoppingList: (state, action) => {
       const {product}  = action.payload;
       state.cartItems = state.cartItems.filter(item => {
-        return item?.product?.code!== product?.product.code || item?.size!== product.size
+        return item?.product?.code!== product?.product?.code || item?.size!== product.size
       });
     },
     setTotalPrice: (state, action) => {
