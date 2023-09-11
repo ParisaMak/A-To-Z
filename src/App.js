@@ -1,54 +1,42 @@
 import { Home, Product, Products, Item, Items, ShoppingCard , Login, SignUp, Favorites  }from './pages';
 import MainLayout  from './Layouts/MainLayout';
-import { useEffect } from 'react';
 import { Routes ,Route  }  from 'react-router-dom';
 import Profile from  "./components/Profile"
 import { useSelector ,useDispatch} from 'react-redux';
 import{ getCartItems, getFavoriteItems } from './firebase/firestore';
-import { auth } from './firebase/firebase.utils';
-import  { addToShoppingList }from './redux-toolkit/Slice/CartSlice'
+import  { addToShoppingList, resetCartItems }from './redux-toolkit/Slice/CartSlice'
 import {db} from './firebase/firebase.utils';
-import {setFavorites} from './redux-toolkit/Slice/FavoriteSlice';
-import { setUserId } from './redux-toolkit/Slice/CartSlice';
-import { setId } from './redux-toolkit/Slice/FavoriteSlice';
-import { login } from './redux-toolkit/Slice/userSlice';
-import { onAuthStateChanged } from 'firebase/auth';
+import {setFavorites,resetFavoriteItems} from './redux-toolkit/Slice/FavoriteSlice';
+
 
 function App() {
 
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.userId);
+
+  const fetchItems = async () => {
+    try {
+      const favoriteItemsPromise = getFavoriteItems(userId, db);
+      favoriteItemsPromise.then((favoriteItems) => {
+        dispatch(resetFavoriteItems([]));
+        favoriteItems.forEach((item) => {
+          dispatch(setFavorites(item));
+        });
+      });
   
-  // const fetchUserDataOnLogin = (userId) => {
-  //   return async (dispatch) => {
-  //     const cartItems = await getCartItems(userId,db);
-  //     const favoriteItems = await getFavoriteItems(userId,db);
-  //     cartItems.forEach((item) => {
-  //       dispatch(addToShoppingList(item));
-  //     });
-  //     favoriteItems.forEach((item) => {
-  //       dispatch(setFavorites(item));
-  //     });
-  //   };
-  // };
-
-  // useEffect(() => {
-  //   dispatch(fetchUserDataOnLogin(userId));
-  // }, [dispatch, userId]);
+      const cartItemsPromise = getCartItems(userId, db);
+      cartItemsPromise.then((cartItems) => {
+        dispatch(resetCartItems([]));
+        cartItems.forEach((item) => {
+          dispatch(addToShoppingList(item));
+        });
+      });
+    } catch (error) {
+     console.log(error)
+    }
+  };
+  fetchItems();
   
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(login(user));
-        dispatch(setUserId(user.uid));
-        dispatch(setId(user.uid));
-      }
-    });
-
-    return () => unsubscribe();
-  }, [dispatch]);
-
-
   return (
     <div className='w-full h-full flex flex-col'>
       <Routes>

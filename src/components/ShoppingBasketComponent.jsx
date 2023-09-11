@@ -1,8 +1,9 @@
-import { removeFromShoppingList  } from '../redux-toolkit/Slice/CartSlice';
+import {  removeFromShoppingList,updateProductQuantity } from '../redux-toolkit/Slice/CartSlice';
 import { useDispatch ,useSelector } from 'react-redux';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { removeItemInShoppingCart ,getItemIdSHoppingCard } from "../firebase/firestore.js"
+import { removeItemInShoppingCart ,getItemIdShoppingCart,updateItemQuantityInFirestore } from "../firebase/firestore.js"
+import {db} from '../firebase/firebase.utils'
 
 const numberArray = Array.from({ length: 20 }, (_, index) => index + 1);
 
@@ -12,21 +13,39 @@ function ShoppingBasketComponent({ listItem  }) {
   
   const handleRemoveFromShoppingList = async (product) => {
     dispatch(removeFromShoppingList({ product }));
-    const itemIds = await getItemIdSHoppingCard (userId,product);
-    itemIds.forEach((itemId) => {
-      removeItemInShoppingCart(itemId);
-    });
-
-  };
+    const itemIds = await getItemIdShoppingCart (userId,product);
+    removeItemInShoppingCart(itemIds[0]);
+    };
+    const handleChange = async(event) => {
+      const quantity = parseInt(event.target.value);
+     console.log(listItem)
+     const{code,color,image,name,price,size}=listItem
+     const newItemWithQuantity={
+      code,
+      name,
+      color,
+      image,
+      price,
+      size,
+      quantity
+     }
+     console.log(newItemWithQuantity)
+     dispatch(updateProductQuantity(newItemWithQuantity));
+     const itemIds = await getItemIdShoppingCart(userId, listItem);
+     const itemId = itemIds[0];
+     if (itemId) {
+      await updateItemQuantityInFirestore(db, itemId, quantity);
+    }
+    };
 
   return (
     <div className='w-full flex justify-center items-center bg-white' >
       <div className="w-[300px] flex flex-col justify-center items-center  gap-4 p-8 sm:flex-row sm:p-4  sm:w-full">
         <div className="w-full h-full sm:w-[150px] sm:h-[150px]">
-         <Link to={`/items/${listItem?.product?.code}`}>
+         <Link to={`/items/${listItem?.code}`}>
             <img 
             src={listItem?.image} 
-            className="w-full h-full object-cover rounded-sm" />
+            className="w-full h-full object-cover rounded-sm position-top" />
          </Link> 
         </div>
         <div className="w-full flex flex-col rounded-sm justify-between ">
@@ -45,10 +64,10 @@ function ShoppingBasketComponent({ listItem  }) {
             </div>
           </div>
           <div className="flex gap-4 justify-between">
-            <select className="border-2 border-black">
+            <select className="border-2 border-black" onChange={handleChange} value={listItem} >
               {numberArray.map((number) => (
-                <option key={number} value={number}>
-                  {listItem.quantity}
+                <option key={number} value={listItem.quantity}>
+                  {number}
                 </option>
               ))}
             </select>

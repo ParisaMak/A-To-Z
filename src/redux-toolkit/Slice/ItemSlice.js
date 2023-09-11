@@ -15,5 +15,5 @@ const itemSlice = createSlice({
 });
 
 export default itemSlice.reducer;
-export const { addToShoppingList, setItems, setFavorites,removeFromShoppingList ,removeFromFavoriteList,setTotalPrice } = itemSlice.actions;
+export const { setItems } = itemSlice.actions;
 

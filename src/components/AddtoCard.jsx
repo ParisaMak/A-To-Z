@@ -20,9 +20,13 @@ function AddToCard({ filteredItems }) {
     name:product?.name
   }
  
-  const handleAddToShoppingList = () => {
+  const { code, price, image, color, name } = savingProduct;
 
-   const {code, price,image,color,name} = savingProduct
+  const handleAddToShoppingList = () => {
+    if (!size) {
+      alert('Please choose a size before adding to shopping list');
+      return;
+    }
     const item = {
       size,
       quantity,
@@ -32,10 +36,10 @@ function AddToCard({ filteredItems }) {
       image,
       name
     };
-    dispatch(addToShoppingList(item));
-    addItemInShoppingCart(userId , item)
-  };
 
+    dispatch(addToShoppingList(item));
+    addItemInShoppingCart(userId, item);
+  };
 
   const handleAddToFavorite = () => {
     const {code,name} = product
@@ -81,7 +85,9 @@ function AddToCard({ filteredItems }) {
         >
           Add
         </button>
-        <button  className="border-[1px] border-black px-2 hover:text-red-700" onClick={handleAddToFavorite}><CgHeart /></button>
+        <button  className="border-[1px] border-black px-2 hover:text-red-700" 
+        onClick={handleAddToFavorite}
+        ><CgHeart /></button>
       </div>
     </div>
   );

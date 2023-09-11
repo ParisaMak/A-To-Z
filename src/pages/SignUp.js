@@ -1,7 +1,8 @@
 import { useState, } from 'react';
 import { Link ,useNavigate} from 'react-router-dom';
-import { createAuthUserWithEmailAndPassword} from '../firebase/firebase.utils';
-
+import { createAuthUserWithEmailAndPassword,db} from '../firebase/firebase.utils';
+import { useDispatch } from 'react-redux';
+import { setDoc,doc } from 'firebase/firestore';
 const defaultFormFields={
   displayName:'',
   email:'',
@@ -30,7 +31,11 @@ const SignUp = () => {
 
    try{
     const {user}= await createAuthUserWithEmailAndPassword (email ,password);
-    console.log(user)
+    await  setDoc(doc(db, "users", user.uid), {
+      uid: user.uid,
+      email: user.email,
+      displayName: displayName
+    });
      navigate("/");
       resetFormFiels()
    }catch(error){

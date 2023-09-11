@@ -44,7 +44,9 @@ function ItemCard({ item }) {
         </div>
       </div>
       <div className="pt-1">
-        <AiOutlineHeart className="hover:text-red-700" onClick={() => handleAddToFavorite(product)}/>
+        <AiOutlineHeart className="hover:text-red-700" 
+        onClick={() => handleAddToFavorite(product)}
+        />
       </div>
     </div>
   );

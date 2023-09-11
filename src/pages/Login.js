@@ -1,9 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState  } from 'react';
+import { useDispatch} from 'react-redux';
+import { setUserId } from '../redux-toolkit/Slice/CartSlice';
+import { setId } from '../redux-toolkit/Slice/FavoriteSlice';
+import { login } from '../redux-toolkit/Slice/userSlice';
+import { doc, getDoc } from "firebase/firestore";
+import { db } from '../firebase/firebase.utils'
 
 import { 
   signInWithGooglePopup ,
-  // createUserDocumentFromAuth ,
   signInAuthUserWithEmailAndPassword } from '../firebase/firebase.utils';
 
 
@@ -13,49 +18,62 @@ const defaultFormFields={
   password:'',
 }
 const Login = () => {
-  const [formFields ,setFormFields] = useState(defaultFormFields);
-  const { email ,password } = formFields;
-  const navigate = useNavigate();
-  const resetFormFiels = () =>{
-    setFormFields(defaultFormFields)
-  }
+  const [formFields, setFormFields] = useState(defaultFormFields);
+const { email, password } = formFields;
+const navigate = useNavigate();
+const dispatch = useDispatch();
 
-  const handleChange = (event) => {
-    const { value, name } = event.target;
-    setFormFields({ ...formFields, [name]: value });
-  }
-  
-  const logGoogleUser = async () => {
-    try {
-        const {user} = await signInWithGooglePopup();
-        navigate("/profile");
-    
-    } catch (error) {
-        if (error.code === 'auth/popup-closed-by-user') {
-            console.log('Google sign-in popup was closed before sign-in was complete.');
-        } else {
-            console.log('An error occurred during Google sign-in: ', error.message);
-        }
+const resetFormFields = () => {
+  setFormFields(defaultFormFields);
+};
+
+const handleChange = (event) => {
+  const { value, name } = event.target;
+  setFormFields({ ...formFields, [name]: value });
+};
+
+const logGoogleUser = async () => {
+  try {
+    const { user } = await signInWithGooglePopup(email, password);
+    dispatch(login(user));
+    dispatch(setUserId(user.uid));
+    dispatch(setId(user.uid));
+    navigate("/profile", { replace: true });
+    resetFormFields();
+  } catch (error) {
+    if (error.code === 'auth/popup-closed-by-user') {
+      console.log('Google sign-in popup was closed before sign-in was complete.');
+    } else {
+      console.log('An error occurred during Google sign-in: ', error.message);
     }
-}
-const handleSubmit = async (e) =>{
+  }
+};
+
+const handleSubmit = async (e) => {
   e.preventDefault();
-  try{
-   const {user} = await signInAuthUserWithEmailAndPassword (email,password);
-   navigate("/profile" , { replace: true });
-   resetFormFiels()
-
-  }catch(error){
-    if(error.code === 'auth/wrong-password'){
-      alert("incorrect password for email")
-    }else if(error.code ==='auth/user-not-found'){
-      alert('No user associated with this email')
-    }else{
-      console.log(error)
+  try {
+    const { user } = await signInAuthUserWithEmailAndPassword(email, password);
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      dispatch(login(userData));
+      dispatch(setUserId(user.uid));
+      dispatch(setId(user.uid));
+      navigate("/profile", { replace: true });
+      resetFormFields();
+    } else {
+      console.log("No such user!");
+    }
+  } catch (error) {
+    if (error.code === 'auth/wrong-password') {
+      alert("Incorrect password for email");
+    } else if (error.code === 'auth/user-not-found') {
+      alert('No user associated with this email');
+    } else {
+      console.log(error);
     }
   }
- }
-
+};
  return (
   <div className="w-full h-full flex justify-center items-center">
     <div className="w-full h-full  bg-gray-300 flex justify-center items-center sm:h-[450px] sm:w-[450px] ">

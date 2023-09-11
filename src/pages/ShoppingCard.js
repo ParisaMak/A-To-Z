@@ -9,12 +9,12 @@ function ShoppingCard() {
 
   const shoppingList = useSelector((state) => state.cart.cartItems);
 
-  const itemPrice = shoppingList.map((product) => {
-  const price = product?.product?.whitePrice?.price;
-  const quantity = product.quantity;
-  return price * quantity;
-  });
-
+  const itemPrice = Array.isArray(shoppingList) ? shoppingList.map((product) => {
+    const price = product?.price;
+    const quantity = product.quantity;
+    return price * quantity;
+  }) : [];
+  
   const totalPrice = itemPrice.reduce((total, currentValue) => {
     if (!isNaN(currentValue)) {
       return total + currentValue;
@@ -32,13 +32,13 @@ function ShoppingCard() {
       ) : (
         <div className="w-full flex flex-col gap-4 mb-10 sm:flex-row justify-center items-center sm:items-start">
           <div className="w-full h-full flex flex-col gap-2 justify-center items-center">
-            {shoppingList.map((listItem, index) => (
+            {shoppingList? shoppingList.map((listItem, index) => (
               <ShoppingBasketComponent listItem={listItem} key={index} />
-            ))}
+            )):[]}
           </div>
-          {/* <div className="h-full w-[300px] sm:w-full lg:w-[500px]">
+          <div className="h-full w-[300px] sm:w-full lg:w-[500px]">
             <CheckOut totalPrice={totalPrice} />
-          </div> */}
+          </div>
         </div>
       )}
     </div>

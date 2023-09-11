@@ -7,15 +7,29 @@ import userReducer from '../redux-toolkit/Slice/userSlice';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-const persistConfig = {
-  key: 'root',
+const userPersistConfig = {
+  key: 'user',
   storage,
 };
 
-const persistedUserReducer = persistReducer(persistConfig, userReducer);
-const persistedCartReducer = persistReducer(persistConfig, cartReducer);
-const persistedItemReducer = persistReducer(persistConfig, itemReducer);
-const persistedFavoriteReducer = persistReducer(persistConfig, favoriteReducer);
+const cartPersistConfig = {
+  key: 'cart',
+  storage,
+};
+
+const itemPersistConfig = {
+  key: 'item',
+  storage,
+};
+
+const favoritePersistConfig = {
+  key: 'favorite',
+  storage,
+};
+const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
+const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
+const persistedItemReducer = persistReducer(itemPersistConfig, itemReducer);
+const persistedFavoriteReducer = persistReducer(favoritePersistConfig, favoriteReducer);
 
 export const store = configureStore({
     reducer: {

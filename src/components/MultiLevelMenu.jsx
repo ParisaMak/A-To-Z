@@ -32,7 +32,7 @@ const Category = ({categories,handleClick }) => {
 
   return (
     <div className="grid grid-cols-6 w-full items-start gap-4  pt-4 bg-gray-100 text-xs pl-4 ">
-       {categories.map((category, index ,handleClick ) => (
+       {categories.map((category, index) => (
           <div key={index} className="font-bold">
             {category.CategoriesArray
               .filter((item) => allowedCategories.includes(item.CatName))
