@@ -1,7 +1,6 @@
 import { useState, } from 'react';
 import { Link ,useNavigate} from 'react-router-dom';
 import { createAuthUserWithEmailAndPassword,db} from '../firebase/firebase.utils';
-import { useDispatch } from 'react-redux';
 import { setDoc,doc } from 'firebase/firestore';
 const defaultFormFields={
   displayName:'',

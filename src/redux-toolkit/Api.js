@@ -5,7 +5,7 @@ export const categoriesApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com',
     headers: {
-      'X-RapidAPI-Key': '53c14de0e0msh35541b6d6f0feb1p166c7fjsn6fcc9ebaa163',
+      'X-RapidAPI-Key':process.env.REACT_APP_RAPIDAPI_KEY,
       'X-RapidAPI-Host': 'apidojo-hm-hennes-mauritz-v1.p.rapidapi.com',
     },
   }),

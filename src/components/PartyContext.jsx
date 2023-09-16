@@ -4,7 +4,7 @@ import React from 'react';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const PartyContext = React.memo(() => {
-  const { data, isLoading } = useFetchProductsByContextQuery('Party');
+  const { data, isLoading ,isError } = useFetchProductsByContextQuery('Party');
   const { results } = data || {};
 
   if (!Array.isArray(results)) {
@@ -17,8 +17,7 @@ const PartyContext = React.memo(() => {
   return (
     <div className='w-full '>
       <h1 className='mb-2 font-bold text-md'>Party Items</h1>
-      {isLoading && <div>Loading...</div>}
-      {!isLoading && (
+      {isLoading || isError? null:(
       <div className='w-full flex flex-row justify-between items-center gap-2'>
         {itemsToShow.map((item) => (
           <div key={item.articleCodes[0]} className=' fex-1'>

@@ -6,18 +6,16 @@ createUserWithEmailAndPassword,
 signInWithPopup ,
 signOut,
 signInWithEmailAndPassword,
-onAuthStateChanged,
 GoogleAuthProvider} from 'firebase/auth';
 import{ getFirestore } from 'firebase/firestore';
 
-
 const firebaseConfig = {
-  apiKey: "AIzaSyB6RsuAbqRmXsUNzBikBI1nqptjbEbgSYI",
-  authDomain: "a-to-z-1a377.firebaseapp.com",
-  projectId: "a-to-z-1a377",
-  storageBucket: "a-to-z-1a377.appspot.com",
-  messagingSenderId: "666958543947",
-  appId: "1:666958543947:web:0d81761732d2e38c4121ce"
+  apiKey:process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain:process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId:process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket:process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
 // Initialize Firebase

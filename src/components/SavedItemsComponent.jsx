@@ -10,7 +10,6 @@ function SavedItemsComponent({ listItem }) {
   const userId = useSelector((state)=>state.user.userId);
    
   const handleRemoveFromFavoriteList = async(product) => {
-    console.log(product)
     dispatch(removeFromFavoriteList(product));
     const {code} =product
     removeItemFromFavoriteCart(userId,code)
@@ -22,8 +21,7 @@ function SavedItemsComponent({ listItem }) {
       <div className="  border-[1px] border-gray-500 h-full flex flex-col gap-2 p-4 rounded-lg  ">
        <div className="h-[250px] w-auto  object-cover flex justify-center ">
         <Link to={`/items/${listItem?.code}`}>
-          <img  
-        src={listItem?.image}
+          <img  src={listItem?.image} alt={listItem?.name}
         className=" h-full object-cover" /></Link> 
       </div>
       <div className="relative w-full flex flex-col rounded-sm justify-between items-center px-4">

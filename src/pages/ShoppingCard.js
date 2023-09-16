@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { setTotalPrice } from '../redux-toolkit/Slice/CartSlice';
 import ShoppingBasketComponent from '../components/ShoppingBasketComponent';
 import CheckOut from '../components/CheckOut';
@@ -22,7 +23,9 @@ function ShoppingCard() {
     return total;
   }, 0);
 
-  dispatch(setTotalPrice(totalPrice));
+  useEffect(() => {
+    dispatch(setTotalPrice(totalPrice));
+}, [totalPrice, dispatch]);
 
   return (
     <div className="w-full h-full p-4 bg-gray-300 md:p-10">

@@ -93,8 +93,12 @@ export const removeItemFromFavoriteCart = async (userId, code) => {
 };
 
 export const updateItemQuantityInFirestore = async (itemId, quantity) => {
-  const itemRef = doc(db, 'shoppingCart', itemId);
-  await updateDoc(itemRef, {
-    quantity: quantity
-  });
+  try {
+    const itemRef = doc(db, 'shoppingCart', itemId);
+    await updateDoc(itemRef, {
+      quantity: quantity
+    });
+  } catch (error) {
+    console.error("Error updating item quantity:", error);
+  }
 };

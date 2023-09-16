@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 function Profile() {
   const currentUser = useSelector((state)=>state.user.currentUser);
-  console.log(currentUser)
+
   return (
     <div className='w-full h-full '>
       <div className=' w-full h-full p-10 text-2xl '>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function SchoolContext() {
-  const { data ,isLoading} = useFetchProductsByContextQuery('School');
+  const { data ,isLoading ,isError} = useFetchProductsByContextQuery('School');
 
   if (!Array.isArray(data?.results)) {
     return null;
@@ -15,7 +15,7 @@ function SchoolContext() {
   return (
     <div className='w-full '>
       <h1 className='mb-2 font-bold text-md'>School Items</h1>
-      {isLoading?( <div >Loading...</div>):( 
+      {isLoading || isError? null:(
       <div className='w-full flex flex-row justify-between items-center gap-2'>
         {itemsToShow.map((item) => (
           <div key={item.articleCodes[0]}>

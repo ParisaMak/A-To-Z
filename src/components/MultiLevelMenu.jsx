@@ -36,8 +36,8 @@ const Category = ({categories,handleClick }) => {
           <div key={index} className="font-bold">
             {category.CategoriesArray
               .filter((item) => allowedCategories.includes(item.CatName))
-              .map((item) => (
-                <Item item={item} category={category}  handleClick ={handleClick }/>
+              .map((item ,index) => (
+                <Item item={item} category={category} key={index} handleClick ={handleClick }/>
               ))}
           </div>
            ))}

@@ -9,7 +9,6 @@ const MemoizedMiddleNavbar = React.memo(MiddleNavbar);
 const MemoizedEverydayFashionConcept = React.memo(EverydayFashionConcept);
 
 function Home() {
-
   return (
     <div className='w-full p-10 flex flex-col gap-10 lg:px-40'>
         <>

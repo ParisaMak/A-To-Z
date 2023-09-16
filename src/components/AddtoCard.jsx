@@ -23,6 +23,7 @@ function AddToCard({ filteredItems }) {
   const { code, price, image, color, name } = savingProduct;
 
   const handleAddToShoppingList = () => {
+    if(!userId){alert("please login before adding to shopping list")}
     if (!size) {
       alert('Please choose a size before adding to shopping list');
       return;
