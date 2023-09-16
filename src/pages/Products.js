@@ -42,11 +42,11 @@ const Products = () => {
       />
       <div className=" px-10 w-full sm:w-2/3">
       <div className="flex flex-col w-full justify-center ">
-        <div className='flex flex-row w-full justify-center'>
+        <div className='flex flex-row w-full justify-center bg-gray-300 '>
             {TwoImages?.map((image,index)=>(
               <div key={index}>
                 <img className='max-w-full w-auto max-h-full h-auto' src={image?.galleryImages[0]?.baseUrl} alt={image?.name} />
-                <p className='bg-gray-300 text-center py-4 text-xs h-full'>{image.name}</p>
+                <p className='text-center py-4 text-xsh-full'>{image.name}</p>
               </div>
             ))}
          </div>
