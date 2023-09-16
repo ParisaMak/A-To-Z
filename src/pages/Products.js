@@ -32,27 +32,26 @@ const Products = () => {
   }
 
   const TwoImages=imageFirst.slice(0,2);
-  console.log(filteredProducts )
+  console.log(TwoImages)
   return (
-    <div className="w-full flex flex-row justify-center items-center gap-4 py-4 ">
+    <div className="w-full flex flex-row justify-center items-center gap-4 py-4 px-8">
       <Sidebar
         filteredProducts={filteredProducts}
         CatName={CatName}
         className="w-1/3"
       />
-      <div className=" px-10 w-full sm:w-2/3">
-      <div className="flex flex-col w-full justify-center ">
-        <div className='flex flex-row w-full justify-center bg-gray-300 '>
+      <div className=" w-full sm:w-2/3 h-full bg-gray-300 justify-center flex flex-col ">
+         <div className='  flex flex-row  '>
             {TwoImages?.map((image,index)=>(
-              <div key={index}>
-                <img className='max-w-full w-auto max-h-full h-auto' src={image?.galleryImages[0]?.baseUrl} alt={image?.name} />
-                <p className='text-center py-4 text-xsh-full'>{image.name}</p>
-              </div>
+              <Link key={index}  to={`/items/${image?.defaultArticle?.code}`} className='w-[50%] '>
+                <img className=' max-h-full max-w-full object-cover object-fit' src={image?.galleryImages[0]?.baseUrl} alt={image?.name} />
+                <p className='py-4 border-[1px] text-center text-xs  lg:text-base'>{image?.name}</p>
+              </Link>
             ))}
          </div>
-         <div className='w-full flex justify-between mt-4'>
+         <div className='w-full flex justify-center items-center pt-4'>
          {filteredProducts.map((item)=>(
-         <Link className='bg-white w-full border-[1px] text-center  border-black px-4 py-2 text-[12px]  hover:bg-red-700 hover:text-white hover:border-white sm:text-sm xl:text-md' to={`/${CatName}/${item?.CatName}`} key={item?.CatName}>{item.CatName}</Link>
+         <Link className='bg-white w-full text-center border-[1px]  border-black px-4 py-2 text-[12px]  hover:bg-red-700 hover:text-white hover:border-white sm:text-sm xl:text-md' to={`/${CatName}/${item?.CatName}`} key={item?.CatName}>{item.CatName}</Link>
           ))}
           </div>
 
@@ -66,7 +65,7 @@ const Products = () => {
         /> */}
         </div>
      </div>
-     </div>
+
   );
 };
 
