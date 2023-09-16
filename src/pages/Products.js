@@ -46,7 +46,7 @@ const Products = () => {
             {TwoImages?.map((image,index)=>(
               <div key={index}>
                 <img className='max-w-full w-auto max-h-full h-auto' src={image?.galleryImages[0]?.baseUrl} alt={image?.name} />
-                <p className='bg-gray-300 text-center py-4 text-xs'>{image.name}</p>
+                <p className='bg-gray-300 text-center py-4 text-xs h-full'>{image.name}</p>
               </div>
             ))}
          </div>
