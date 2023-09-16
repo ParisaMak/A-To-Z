@@ -40,7 +40,7 @@ const Products = () => {
         CatName={CatName}
         className="w-1/3"
       />
-      <div className=" px-10 w-2/3">
+      <div className=" px-10 w-full sm:w-2/3">
       <div className="flex flex-col w-full justify-center ">
         <div className='flex flex-row w-full justify-center'>
             {TwoImages?.map((image,index)=>(
