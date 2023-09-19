@@ -1,1 +1,3 @@
 https://hm-clone-website.netlify.app/
+
+The main application is built using React, and it integrates with Firebase for authentication and data storage. The application also uses Redux Toolkit for state management and has integrated Stripe for payment processing. The project uses Tailwind CSS for styling and has a configuration for it. The main application structure includes various components like Navbar, Footer, MultiLevelMenu, and several pages like Home, Product, Products, and more.The application is designed to be fully responsive, ensuring a consistent user experience across various devices.
