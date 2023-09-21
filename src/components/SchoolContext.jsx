@@ -16,7 +16,7 @@ function SchoolContext() {
     <div className='w-full '>
       <h1 className='mb-2 font-bold text-md'>School Items</h1>
       {isLoading || isError? null:(
-      <div className='w-full flex flex-row justify-between items-center gap-2'>
+      <div className='w-full flex flex-row justify-center items-center '>
         {itemsToShow.map((item) => (
           <div key={item.articleCodes[0]}>
             <Link to={`/items/${item.articleCodes[0]}`} className=' fex-1'>
