@@ -38,13 +38,13 @@ const ImageSlider = ({ data }) => {
           {data?.results?.map((item ,index) => (
             <div className=" flex flex-row w-full" key={index}>
               <Link className="w-full p-0 m-0 sm:w-1/2 " to={`/items/${item?.articleCodes?.[0]}`}>
-                <img src={item?.galleryImages?.[0]?.baseUrl || item?.allArticleImages?.[0]} 
+                <img src={item?.galleryImages?.[0]?.baseUrl || item?.allArticleBaseImages?.[0]} 
                 alt="img"  
                 className="w-full object-cover"
                  />
               </Link>
               <Link className="w-0 sm:w-1/2 p-0 m-0" to={`/items/${item?.articleCodes?.[0]}`}>
-                <img src={item?.galleryImages?.[1]?.baseUrl || item?.allArticleImages?.[1]}  alt="img" className="w-full object-cover" />
+                <img src={item?.galleryImages?.[1]?.baseUrl || item?.allArticleBaseImages?.[1]}  alt="img" className="w-full object-cover" />
               </Link>
             </div>
           ))}
