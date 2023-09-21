@@ -2,7 +2,7 @@ import { useFetchProductsByConceptQuery } from '../redux-toolkit/Api';
 import ImageSlider from './ImageSlider';
 
 const MamaConcept = () => {
-  const { data ,isError,isLoading } = useFetchProductsByConceptQuery('MAMA');
+  const { data ,isError,isLoading } = useFetchProductsByConceptQuery('DIVIDED');
 
   return (
     <div className="w-full">
