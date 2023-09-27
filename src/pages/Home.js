@@ -1,8 +1,13 @@
 import React from 'react';
-import { MamaConcept, ModernClassicConcept, PartyContext, SchoolContext, MiddleNavbar ,EverydayFashionConcept } from '.';
+import { MamaConcept,
+  // ModernClassicConcept,
+  PartyContext,
+  SchoolContext,
+  MiddleNavbar ,
+  EverydayFashionConcept } from '.';
 
 const MemoizedMamaConcept = React.memo(MamaConcept);
-const MemoizedModernClassicConcept = React.memo(ModernClassicConcept);
+// const MemoizedModernClassicConcept = React.memo(ModernClassicConcept);
 const MemoizedPartyContext = React.memo(PartyContext);
 const MemoizedSchoolContext = React.memo(SchoolContext);
 const MemoizedMiddleNavbar = React.memo(MiddleNavbar);
