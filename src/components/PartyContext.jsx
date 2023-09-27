@@ -25,11 +25,7 @@ const PartyContext = React.memo(() => {
             <Link
             to={`/items/${item?.defaultArticle?.code}`}
              >
-<<<<<<< HEAD
-              <LazyLoadImage src={item?.allArticleImages[0]} alt="images"  className='object-cover max-h-[250px]' />
-=======
               <LazyLoadImage  src={item?.allArticleImages[0]} alt="images"  className='object-cover max-h-[250px]' />
->>>>>>> fa9a88f6eb524758d89c29fc96ae72a925e4e5ba
             </Link>
           </div>
         ))}
