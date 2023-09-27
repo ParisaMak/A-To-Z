@@ -12,7 +12,10 @@ function ItemCard({ item }) {
   const userId = useSelector((state)=>state.user.userId)
 
   const handleAddToFavorite = (product) => {
-    
+    if (!userId) {
+      alert("Please login before adding to favorites");
+      return;
+    }
     const {code,name} = product
     const price = product?.whitePrice.price|| product?.whitePrice.value;
     const image=product?.images[0]?.baseUrl;

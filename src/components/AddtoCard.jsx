@@ -43,6 +43,10 @@ function AddToCard({ filteredItems }) {
   };
 
   const handleAddToFavorite = () => {
+    if (!userId) {
+      alert("Please login before adding to favorites");
+      return;
+    }
     const {code,name} = product
     const price = product?.whitePrice.price|| product?.whitePrice.value;
     const image = product?.galleryDetails[0]?.baseUrl;

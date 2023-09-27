@@ -36,17 +36,17 @@ const ImageSlider = ({ data }) => {
     <div className="relative  w-full overflow-x-scroll scrollbar-hide" ref={sliderRef}>
         <div className="flex flex-row w-[calc(100%*5)] whitespace-nowrap">
           {data?.results?.map((item ,index) => (
-            <div className=" flex flex-row w-full" key={index}>
-              <Link className="w-full p-0 m-0 sm:w-1/2 " to={`/items/${item?.articleCodes?.[0]}`}>
-                <LazyLoadImage src={item?.galleryImages?.[0]?.baseUrl || item?.allArticleImages?.[0]} 
-                alt="img"  
-                className="w-full object-cover"
-                 />
+              <div className=" flex flex-row w-full" key={index}>    
+               <Link className="w-full p-0 m-0 sm:w-1/2 " to={`/items/${item?.articleCodes?.[0]}`}>
+                   <LazyLoadImage src={ item?.allArticleBaseImages?.[0] || item?.galleryImages?.[0]?.baseUrl} 
+                   alt="img"  
+                   className="w-full object-cover"
+                    />
               </Link>
               <Link className="w-0 sm:w-1/2 p-0 m-0" to={`/items/${item?.articleCodes?.[0]}`}>
-                <LazyLoadImage src={item?.galleryImages?.[1]?.baseUrl || item?.allArticleImages?.[1]}  alt="img" className="w-full object-cover" />
+                   <LazyLoadImage src={ item?.allArticleBaseImages?.[1] || item?.galleryImages?.[1]?.baseUrl}  alt="img" className="w-full object-cover" />
               </Link>
-            </div>
+              </div>
           ))}
         </div>
     </div>

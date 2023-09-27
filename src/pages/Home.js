@@ -13,7 +13,7 @@ function Home() {
     <div className='w-full p-10 flex flex-col gap-10 lg:px-40'>
         <>
           <MemoizedEverydayFashionConcept/>
-          <MemoizedModernClassicConcept/>
+          {/* <MemoizedModernClassicConcept/> */}
           <MemoizedPartyContext  />
           <MemoizedMiddleNavbar  />
           <MemoizedSchoolContext />

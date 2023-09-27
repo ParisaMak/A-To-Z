@@ -13,19 +13,19 @@ const PartyContext = React.memo(() => {
 
   const screenWidth = window.innerWidth;
   const itemsToShow = screenWidth < 640 ? results.slice(0, 3) : results;
-      console.log(itemsToShow)
+   console.log(itemsToShow)
   return (
     <div className='w-full '>
       <h1 className='mb-2 font-bold text-md'>Party Items</h1>
       {isLoading || isError || itemsToShow === null ? null:(
-      <div className='w-full flex flex-row justify-center items-center '>
+      <div className='w-full flex flex-row justify-between items-center'>
         {itemsToShow.map((item) => (
           <div 
-          key={item.articleCodes[0]} className=' fex-1'>
+          key={item?.defaultArticle?.code} >
             <Link
-             to={`/items/}`}
+            to={`/items/${item?.defaultArticle?.code}`}
              >
-              < img  src={item?.allArticleImages[0]} alt="images"  className='object-cover max-h-[250px]' />
+              <LazyLoadImage src={item?.allArticleImages[0]} alt="images"  className='object-cover max-h-[250px]' />
             </Link>
           </div>
         ))}

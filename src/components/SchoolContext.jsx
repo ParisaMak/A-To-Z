@@ -16,10 +16,10 @@ function SchoolContext() {
     <div className='w-full '>
       <h1 className='mb-2 font-bold text-md'>School Items</h1>
       {isLoading || isError? null:(
-      <div className='w-full flex flex-row justify-center items-center '>
+      <div className='w-full flex flex-row justify-between items-center'>
         {itemsToShow.map((item) => (
           <div key={item.articleCodes[0]}>
-            <Link to={`/items/${item.articleCodes[0]}`} className=' fex-1'>
+            <Link to={`/items/${item.articleCodes[0]}`} className=' flex-1'>
               < LazyLoadImage src={item.images[0].baseUrl} alt="images" className='object-cover max-h-[250px]' />
             </Link>
           </div>

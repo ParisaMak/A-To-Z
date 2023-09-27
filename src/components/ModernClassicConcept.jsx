@@ -3,7 +3,7 @@ import ImageSlider from './ImageSlider';
 
 const ModernClassicConcept = () => {
   const { data ,isLoading,isError } = useFetchProductsByConceptQuery('MODERN CLASSIC');
-
+   console.log(data)
   return (
     <div className="w-full">
       {isLoading || isError? null:(
